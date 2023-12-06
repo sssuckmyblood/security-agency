@@ -6,24 +6,12 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
-}
-
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
 }
 
 // Necessary for Next auth
@@ -61,7 +49,6 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
 }
 
 model VerificationToken {
@@ -70,4 +57,78 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Security {
+    id             Int         @id @default(autoincrement())
+    FIO            String      @unique
+    rank           Rank        @relation(fields: [rankId], references: [id])
+    rankId         Int
+    phone          String
+    employmentDate DateTime
+    timetable      Timetable[]
+    incident       Incident[]
+}
+
+model Rank {
+    id       Int        @id @default(autoincrement())
+    rankName String     @unique
+    hourCost Decimal    @db.Money
+    security Security[]
+}
+
+model Object {
+    id          Int                   @id @default(autoincrement())
+    name        String                @unique
+    address     String
+    description String
+    timetable   Timetable[]
+    equipment   LinkEquipmentObject[]
+    incident    Incident[]
+}
+
+model Timetable {
+    id Int @id @default(autoincrement())
+
+    security   Security @relation(fields: [securityId], references: [id])
+    securityId Int
+
+    object   Object @relation(fields: [objectId], references: [id])
+    objectId Int
+
+    startWorkDate DateTime
+    endWorkDate   DateTime
+    countHour     Int
+}
+
+model Equipment {
+    id     Int                   @id @default(autoincrement())
+    type   String                @unique
+    object LinkEquipmentObject[]
+}
+
+model LinkEquipmentObject {
+    id Int @id @default(autoincrement())
+
+    object   Object @relation(fields: [objectId], references: [id])
+    objectId Int
+
+    equipment   Equipment @relation(fields: [equipmentId], references: [id])
+    equipmentId Int
+
+    placement String
+    status    String
+    checkData DateTime
+}
+
+model Incident {
+    id          Int      @id @default(autoincrement())
+    date        DateTime
+    description String
+
+    object   Object @relation(fields: [objectId], references: [id])
+    objectId Int
+
+    security   Security @relation(fields: [securityId], references: [id])
+    securityId Int
 }
