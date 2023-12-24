@@ -30,6 +30,12 @@ export default function MainHeader() {
                 <Link href={"/incident"}>Проишествия</Link>
             ),
         },
+        {
+            key: 'report',
+            label: (
+                <Link href={"/report"}>Отчеты</Link>
+            ),
+        },
 
 
 

@@ -21,7 +21,8 @@ export const objectRouter = createTRPCRouter({
                         include:{
                             equipment: true
                         }
-                       }
+                       },
+                       incident: true
                     }
         });
       }),
