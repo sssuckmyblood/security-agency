@@ -9,6 +9,7 @@ import { api } from "~/utils/api";
 import { v4 as uuid } from 'uuid';
 import moment from "moment";
 import { SearchOutlined } from '@ant-design/icons';
+import router from "next/router";
 
 export default function Home() {
   const getData = api.object.getObjects.useQuery();
@@ -188,6 +189,7 @@ export default function Home() {
           <MainHeader />
           <Content className="mt-2 h-max inline-block content">
             <h1 className="text-center">Таблица объектов</h1>
+            <Button type="primary" onClick={()=>router.push("/")}>Добавить запись</Button>
             <Table
               bordered
               className="mt-1"

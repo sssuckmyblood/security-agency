@@ -1,4 +1,4 @@
-import { Layout, Table } from "antd";
+import { Button, Layout, Table } from "antd";
 import { AnyObject } from "antd/es/_util/type";
 import { ColumnsType } from "antd/es/table";
 import Head from "next/head";
@@ -8,6 +8,7 @@ const { Content } = Layout;
 import { api } from "~/utils/api";
 import { v4 as uuid } from 'uuid';
 import moment from "moment";
+import router from "next/router";
 
 export default function Timetable() {
     const getData = api.timetable.getTimetable.useQuery();
@@ -107,6 +108,7 @@ export default function Timetable() {
                     <MainHeader />
                     <Content className="mt-2 h-max inline-block content">
                     <h1 className="text-center">Расписание работы охранников</h1>
+                    <Button type="primary" onClick={()=>router.push("/")}>Добавить запись</Button>
                         <Table
                             bordered
                             className="mt-1"

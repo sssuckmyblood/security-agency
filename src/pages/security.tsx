@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 import moment from "moment";
 import { SearchOutlined } from '@ant-design/icons';
 import { ColumnFilterItem, SorterResult } from "antd/es/table/interface";
+import router from "next/router";
 
 export default function Security() {
     const getData = api.security.getSecurity.useQuery();
@@ -202,6 +203,7 @@ export default function Security() {
                     <MainHeader />
                     <Content className="mt-2 h-max inline-block content">
                     <h1 className="text-center">Таблица охранников</h1>
+                    <Button type="primary" onClick={()=>router.push("/")}>Добавить запись</Button>
                         <Table
                             bordered
                             className="mt-1"
