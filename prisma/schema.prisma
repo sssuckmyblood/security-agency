@@ -66,6 +66,7 @@ model Security {
     rankId         Int
     phone          String
     employmentDate DateTime
+    age            Int
     timetable      Timetable[]
     incident       Incident[]
 }
@@ -120,6 +121,8 @@ model LinkEquipmentObject {
     status    String
     checkData DateTime
 }
+
+
 
 model Incident {
     id          Int      @id @default(autoincrement())
