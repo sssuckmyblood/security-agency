@@ -1,4 +1,4 @@
-import { Button, Input, Layout, Space, Table } from "antd";
+import { Button, Input, Layout, Space, Table, Tag } from "antd";
 import { AnyObject } from "antd/es/_util/type";
 import { ColumnType, ColumnsType } from "antd/es/table";
 import Head from "next/head";
@@ -146,6 +146,15 @@ export default function Home() {
       <SearchOutlined style={{ color: filtered ? '#1677ff' : undefined }} />
     ),
   })
+  const deleteObject = api.object.delete.useMutation();
+
+  const handleDelete = (values: AnyObject) => {
+    deleteObject.mutate({id: values.id});
+    setTableData((current) =>
+      current.filter((item) => item.id !== values.id)
+    );
+    
+  }
   
   const columns: ColumnsType<AnyObject> = [
     {
@@ -174,6 +183,17 @@ export default function Home() {
       key: 'description',
 
     },
+    {
+      title: 'Действие',
+      key: 'action',
+      render: (id, _) => (
+              <Space size="middle">
+                      <Tag color={"red"}>
+                              <a onClick={() => handleDelete(id)}>Удалить</a>
+                      </Tag>
+              </Space>
+      ),
+    }
 
 
   ];
@@ -189,7 +209,7 @@ export default function Home() {
           <MainHeader />
           <Content className="mt-2 h-max inline-block content">
             <h1 className="text-center">Таблица объектов</h1>
-            <Button type="primary" onClick={()=>router.push("/")}>Добавить запись</Button>
+            <Button type="primary" onClick={()=>router.push("/object/create")}>Добавить запись</Button>
             <Table
               bordered
               className="mt-1"
