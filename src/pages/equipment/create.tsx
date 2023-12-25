@@ -6,7 +6,7 @@ import { LoadingOutlined, CloseOutlined } from '@ant-design/icons';
 import { api } from "~/utils/api";
 import { useEffect, useState } from "react";
 
-interface Object {
+interface ObjectType {
     objectId: number;
     placement: string;
     status: string;
@@ -16,7 +16,7 @@ interface Object {
 
 interface FormData {
     type: string;
-    object: Object[];
+    object: ObjectType[];
 }
 interface SelectType {
     label: string,
