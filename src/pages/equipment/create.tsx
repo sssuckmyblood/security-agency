@@ -101,7 +101,7 @@ export default function Create() {
                     <MainHeader />
                     <Content className="mt-2 h-max inline-block content">
                         <div className="bg-white items-center w-[1000px] margin-0 m-auto rounded-xl">
-                            <h2 className="text-center">Добавить тренера</h2>
+                            <h2 className="text-center text-black">Добавить Оборудование</h2>
                             <Form<FormData>
                                 name="basic"
                                 className="margin-0 m-auto ml-[30%]"

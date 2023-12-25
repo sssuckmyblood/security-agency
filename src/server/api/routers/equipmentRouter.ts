@@ -54,9 +54,9 @@ export const equipmentRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.equipment.delete({
+      return ctx.db.linkEquipmentObject.deleteMany({
         where:{
-          id: input.id
+          equipmentId: input.id
         }
       });
     
