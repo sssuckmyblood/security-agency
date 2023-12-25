@@ -6,6 +6,7 @@ import { objectRouter } from "./routers/objectRouter";
 import { securityRouter } from "./routers/securityRouter";
 import { timetableRouter } from "./routers/timetableRouter";
 import { incidentRouter } from "./routers/incidentRouter";
+import { equipmentRouter } from "./routers/equipmentRouter";
 
 
 /**
@@ -17,7 +18,8 @@ export const appRouter = createTRPCRouter({
     object: objectRouter,
     security: securityRouter,
     timetable: timetableRouter,
-    incident: incidentRouter
+    incident: incidentRouter,
+    equipment: equipmentRouter,
 });
 
 // export type definition of API

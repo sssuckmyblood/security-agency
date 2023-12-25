@@ -12,6 +12,12 @@ export default function MainHeader() {
             ),
         },
         {
+            key: 'equipment',
+            label: (
+                <Link href={"/equipment"}>Оборудование</Link>
+            ),
+        },
+        {
             key: 'security',
             label: (
                 <Link href={"/security"}>Охранники</Link>
